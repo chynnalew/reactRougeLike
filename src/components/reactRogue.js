@@ -1,14 +1,11 @@
 import React from 'react';
 
-const ReactRouge = () => {
-  const canvasStyle = {
-    width: '256px',
-    height: '256px',
-    border: '5px black solid'
-  }
-  return (
-    <canvas style={canvasStyle}></canvas>
-  );
+const ReactRouge = ({ width, height, tilesize }) => {
+    <canvas
+      width={width * tilesize}
+      height={height * tilesize}
+      style={{border: '1px solid black'}}
+    ></canvas>
 }
 
 export default ReactRouge;

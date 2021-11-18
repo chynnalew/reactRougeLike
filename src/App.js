@@ -3,7 +3,7 @@ import ReactRouge from './components/reactRogue';
 
 const App = () => (
     <div className="App">
-      <ReactRouge />
+    <ReactRouge width={40} height={40} tilesize={16}/>
     </div>
   );
 
