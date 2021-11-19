@@ -1,7 +1,9 @@
 import React from 'react';
+import InputControl from './inputControl';
 
 const ReactRouge = ({ width, height, tilesize }) => {
   const canvasReference = React.useRef();
+  let inputControl = new InputControl();
   React.useEffect(() => {
     console.log('draw to canvas');
     const context = canvasReference.current.getContext('2d');
