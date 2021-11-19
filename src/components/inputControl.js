@@ -1,8 +1,8 @@
 class InputControl{
-  observer = [];
+  observers = [];
 
   subscribe(fn) {
-  this.observer.push(fn)
+  this.observers.push(fn)
   }
   unsubscribe(fn) {
     this.observers= this.observers.filter(subscriber => subscriber !== fn)
@@ -27,8 +27,22 @@ class InputControl{
       case 40:
         this.broadcast('move', { x: 0, y: 1 });
         break;
+      case 65:
+        this.broadcast('move', { x: -1, y: 0 });
+        break;
+      case 87:
+        this.broadcast('move', { x: 0, y: -1 });
+        break;
+      case 68:
+        this.broadcast('move', { x: 1, y: 0 });
+        break;
+      case 83:
+        this.broadcast('move', { x: 0, y: 1 });
+        break;
       default:
         break;
+        
+        
     }
   }
 

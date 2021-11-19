@@ -4,6 +4,21 @@ import InputControl from './inputControl';
 const ReactRouge = ({ width, height, tilesize }) => {
   const canvasReference = React.useRef();
   let inputControl = new InputControl();
+  const handleInput = (action, data) =>{
+    console.log(`handle input: ${action}:${JSON.stringify(data)}`);
+  }
+
+  React.useEffect(() => {
+    console.log('bind input');
+    inputControl.bindKeys();
+    inputControl.subscribe(handleInput);
+    return () => {
+      inputControl.unbindKeys();
+      inputControl.unsubscribe(handleInput);
+    }
+  })
+
+
   React.useEffect(() => {
     console.log('draw to canvas');
     const context = canvasReference.current.getContext('2d');
