@@ -41,8 +41,6 @@ class InputControl{
         break;
       default:
         break;
-        
-        
     }
   }
 

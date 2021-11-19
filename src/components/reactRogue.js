@@ -3,9 +3,15 @@ import InputControl from './inputControl';
 
 const ReactRouge = ({ width, height, tilesize }) => {
   const canvasReference = React.useRef();
+  const [player, setPlayer] = React.useState({x:64, y:128})
   let inputControl = new InputControl();
+
   const handleInput = (action, data) =>{
     console.log(`handle input: ${action}:${JSON.stringify(data)}`);
+    let newPlayer = { ...player };
+    newPlayer.x += data.x * tilesize;
+    newPlayer.y += data.y * tilesize;
+    setPlayer(newPlayer);
   }
 
   React.useEffect(() => {
@@ -24,7 +30,7 @@ const ReactRouge = ({ width, height, tilesize }) => {
     const context = canvasReference.current.getContext('2d');
     context.clearRect(0, 0, width * tilesize, height * tilesize)
     context.fillStyle = '#000';
-    context.fillRect(12, 22, 16, 16)
+    context.fillRect(player.x, player.y, 16, 16)
   })
   return (
     <canvas
