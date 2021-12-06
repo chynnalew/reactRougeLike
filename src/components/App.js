@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactRouge from './components/reactRogue';
+import ReactRouge from './ReactRogue';
 
 const App = () => (
     <div className="App">
