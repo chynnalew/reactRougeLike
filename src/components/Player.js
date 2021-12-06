@@ -8,19 +8,17 @@ class Player {
 
   //method to handle movement
   move(moveX, moveY) {
-    this.x += moveX;
-    this.y += moveY;
+    this.x += moveX*this.size;
+    this.y += moveY*this.size;
   }
 
   //method to draw the player on the canvas
   draw(context) {
-    //color
-    context.fillStyle = '#f00';
-    //make the text (character symbol) appear in the tile instead of above it
+    context.fillStyle = '#000';
     context.textBaseline = 'hanging';
-    // player font
-    context.font = '16pt Helvetica';
-    //symbol to represent the character, Xcoords, Ycoords
-    context.fillText('@', this.x*this.size, this.y*this.size)
-  } 
+    context.font = '16px Helvetica';
+    context.fillText('@',this.x, this.y);
+  }
 }
+
+export default Player;
