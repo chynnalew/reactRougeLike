@@ -25,21 +25,27 @@ const ReactRouge = ({ width, height, tilesize }) => {
     setWorld(newWorld);
   }
 
-  //this hook initially renders the player with player class draw method
-  useEffect(() => {
-    const context = canvasReference.current.getContext('2d');
-    context.clearRect(0, 0, width * tilesize, height * tilesize);
-    world.draw(context);
-  })
-
-  // passing in an empty array as a second argument tells the program to only use effect once on initial render
+  // create map. passing in an empty array as a second parameter tells the program to only use effect once on initial render
   useEffect(() => {
     let newWorld = new World();
     //give new world world's properties
     Object.assign(newWorld, world);
     //call method create the map
     newWorld.createCellularMap();
+    console.log(world.player)
+    newWorld.moveToSpace(world.player);
+    console.log(world.player)
+    setWorld(newWorld);
+    console.log(world.player)
+    // eslint-disable-next-line
   },[])
+
+  //this hook initially renders the world and its entities
+  useEffect(() => {
+    const context = canvasReference.current.getContext('2d');
+    context.clearRect(0, 0, width * tilesize, height * tilesize);
+    world.draw(context);
+  })
 
   //useEffect hook tells react the component needs to do something else after render. it runs after render and after each update to the component
   useEffect(() => {
