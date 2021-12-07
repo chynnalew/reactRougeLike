@@ -1,18 +1,38 @@
 import { Map } from 'rot-js';
+import Player from './Player'
 
 class World {
   constructor(width, height, tilesize) {
     this.width = width;
     this.height = height;
     this.tilesize = tilesize;
+    //add player as an entity in the world so it can interact with world elements
+    this.entities = [
+      new Player(0, 0, 16)
+    ]
+
     //create one dimensional array
     this.worldmap = new Array(this.width);
     //loop over one dimensional array and add a new array at each index to make our array 2d
     for (let x = 0; x < this.width; x++) {
       this.worldmap[x] = new Array(this.height)
     }
-    this.createCellularMap()
   }
+
+  get player() {
+    return this.entities[0]
+  }
+
+  movePlayer(dx, dy) {
+    let playerCopy = this.player.copyPlayer();
+    playerCopy.move(dx, dy);
+    if (this.isWall(playerCopy.x, playerCopy.y)) {
+      console.log(`way blocked at ${playerCopy.x}:${playerCopy.y}`);
+    } else {
+      this.player.move(dx, dy);
+    }
+  }
+
   //uses cellular map generator from rot-js
   createCellularMap() {
     //last argument = properties of map
@@ -40,12 +60,24 @@ class World {
         }
       }
     }
+    this.entities.forEach(entity => {
+      entity.draw(context)
+    })
   }
 
   //use filled in squares for walls
   drawWall(context, x, y) {
     context.fillStyle = '#000';
     context.fillRect(x*this.tilesize, y*this.tilesize, this.tilesize, this.tilesize)
+  }
+
+  //method to check if a wall is at the coords
+  isWall(x, y) {
+    return (
+      this.worldmap[x] === undefined ||
+      this.worldmap[y] === undefined ||
+      this.worldmap[x][y] === 1
+    );
   }
 }
 
