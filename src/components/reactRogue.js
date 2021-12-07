@@ -1,13 +1,15 @@
 import React, {useEffect, useState, useRef} from 'react';
 import InputControl from './InputControl';
 import Player from './Player';
+import World from './World';
 
 const ReactRouge = ({ width, height, tilesize }) => {
   const canvasReference = useRef(null);
-
   //useState hook set equal to array [state, value] ex: [player, setPlayer]. in this case, the code means player state is set to a new instance of the player class
   //now we can change player state with the setPlayer method
-  const [player, setPlayer] = useState(new Player(width*tilesize/2, height*tilesize/2, tilesize))
+  const [player, setPlayer] = useState(new Player(width * tilesize / 2, height * tilesize / 2, tilesize))
+  // create our worldMap
+  const [world, setWorld] = useState(new World(width, height, tilesize))
   
   //create instance of input control class
   let inputControl = new InputControl();
@@ -16,6 +18,7 @@ const ReactRouge = ({ width, height, tilesize }) => {
   useEffect(() => {
     const context = canvasReference.current.getContext('2d');
     context.clearRect(0, 0, width * tilesize, height * tilesize);
+    world.draw(context);
     player.draw(context)
   })
 
@@ -48,7 +51,7 @@ const ReactRouge = ({ width, height, tilesize }) => {
       width={width * tilesize}
       height={height * tilesize}
       style={{border: '1px solid black'}}
-     ></canvas>
+    ></canvas>
   )
 }
 
