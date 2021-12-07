@@ -14,7 +14,7 @@ class Player {
 
   //method to draw the player on the canvas
   draw(context) {
-    context.fillStyle = '#000';
+    context.fillStyle = '#c24b63';
     context.textBaseline = 'hanging';
     context.font = '16px Helvetica';
     context.fillText('@',this.x, this.y);
