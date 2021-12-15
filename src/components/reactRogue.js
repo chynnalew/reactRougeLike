@@ -32,11 +32,9 @@ const ReactRouge = ({ width, height, tilesize }) => {
     Object.assign(newWorld, world);
     //call method create the map
     newWorld.createCellularMap();
-    console.log(world.player)
-    newWorld.moveToSpace(world.player);
-    console.log(world.player)
+    newWorld.moveToSpace(newWorld.entities[0]);
+    newWorld.movePlayer(newWorld.entities[0].x, newWorld.entities[0].y);
     setWorld(newWorld);
-    console.log(world.player)
     // eslint-disable-next-line
   },[])
 
@@ -45,6 +43,7 @@ const ReactRouge = ({ width, height, tilesize }) => {
     const context = canvasReference.current.getContext('2d');
     context.clearRect(0, 0, width * tilesize, height * tilesize);
     world.draw(context);
+    console.log('world drawn')
   })
 
   //useEffect hook tells react the component needs to do something else after render. it runs after render and after each update to the component

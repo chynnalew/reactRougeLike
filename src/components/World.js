@@ -19,14 +19,15 @@ class World {
 
   //method to prevent entities from spawning on a wall
   moveToSpace(entity) {
+    console.log('moveToSpace triggered')
     for (let x = entity.x; x < this.width; x++) {
       for (let y = entity.y; y < this.height; y++) {
         if (this.worldmap[x][y] === 0) {
-          console.log(this.worldmap[x][y]);
+          console.log('moved!')
           entity.x = x;
-          console.log(x)
+          console.log(`${entity} + ${x}`)
           entity.y = y;
-          console.log(y)
+          console.log(`${entity} + ${y}`)
           return;
         }
       }
@@ -38,17 +39,17 @@ class World {
   }
 
   //method to check if a wall is at the coords
-  // isWall(x, y) {
-  //   return (
-  //     this.worldmap[x] === undefined ||
-  //     this.worldmap[y] === undefined ||
-  //     this.worldmap[x][y] === 1
-  //   );
-  // }
+  isWall(x, y) {
+    return (
+      this.worldmap[x] === undefined ||
+      this.worldmap[y] === undefined ||
+      (this.worldmap[x][y] === 1 )
+    );
+  }
 
   movePlayer(dx, dy) {
+    console.log('player moved!')
     let tempPlayer = this.player.copyPlayer();
-    tempPlayer.move(dx, dy);
     if (this.isWall(tempPlayer.x, tempPlayer.y)) {
       console.log(`way blocked at ${tempPlayer.x} and ${tempPlayer.y}`);
     } else {
